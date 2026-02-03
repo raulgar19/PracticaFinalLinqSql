@@ -1,0 +1,81 @@
+﻿@model List<Plantilla>
+
+@{
+    List<string> funciones = ViewData["FUNCIONES"] as List<string>;
+}
+
+<h1>Buscador por Funcion</h1>
+
+<form method="post">
+    <select name="funcion" class="form-control">
+        @foreach (string funcion in funciones)
+            {
+                <option>@funcion</option>
+            }
+    </select>
+    <button class="btn btn-success">Buscar plantilla</button>
+</form>
+
+@if (Model != null) {
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Código Hospital
+                </th>
+                <th>
+                    Código Sala
+                </th>
+                <th>
+                    Número Empleado
+                </th>
+                <th>
+                    Apellido
+                </th>
+                <th>
+                    Funcion
+                </th>
+                <th>
+                    Turno
+                </th>
+                <th>
+                    Salario
+                </th>
+                <th>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var plantilla in Model)
+            {
+                <tr>
+                    <td>
+                        @plantilla.HospitalCod
+                    </td>
+                    <td>
+                        @plantilla.SalaCod
+                    </td>
+                    <td>
+                        @plantilla.EmpleadoNo
+                    </td>
+                    <td>
+                        @plantilla.Apellido
+                    </td>
+                    <td>
+                        @plantilla.Funcion
+                    </td>
+                    <td>
+                        @plantilla.Turno
+                    </td>
+                    <td>
+                        @plantilla.Salario
+                    </td>
+                    <td>
+                        <a class="btn btn-info" asp-controller="Plantilla" asp-action="Editar" asp-route-idEmpleado="@plantilla.EmpleadoNo">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
